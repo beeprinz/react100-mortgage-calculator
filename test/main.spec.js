@@ -11,11 +11,11 @@ app.use(express.static(path.join(__dirname, '/../dist')));
 
 app.listen(8888);
 
-const url = 'http://localhost:8888/index.html';
+const url = 'http://localhost:8888/';
 
 describe('Mortgage Calculator', function () {
-  this.timeout(10000);
-  this.slow(3000);
+  this.timeout(30000);
+  this.slow(5000);
 
   it('returns the correct status code', () => axios.get(url)
     .then(response => expect(response.status === 200)));
@@ -24,7 +24,7 @@ describe('Mortgage Calculator', function () {
     let pageObject;
 
     before(() => {
-      pageObject = nightmare({ show: true }).goto(url);
+      pageObject = nightmare().goto(url);
     });
 
     it('should have the correct page title', () =>
@@ -33,30 +33,6 @@ describe('Mortgage Calculator', function () {
         .then((text) => {
           expect(text).to.contain('Mortgage Calculator');
         })
-    );
-
-    it('should have an input element with the name of "balance"', () =>
-      pageObject
-        .evaluate(() => document.querySelector('input[name=balance]'))
-        .then(input => expect(input).to.exist)
-    );
-
-    it('should have an input element with the name of "rate"', () =>
-      pageObject
-        .evaluate(() => document.querySelector('input[name=rate]'))
-        .then(input => expect(input).to.exist)
-    );
-
-    it('should have an input element with the name of "term"', () =>
-      pageObject
-        .evaluate(() => document.querySelector('select[name=term]'))
-        .then(input => expect(input).to.exist)
-    );
-
-    it('should contain a button with the name of "submit"', () =>
-      pageObject
-        .evaluate(() => document.querySelector('button[name=submit]'))
-        .then(input => expect(input).to.exist)
     );
   });
 

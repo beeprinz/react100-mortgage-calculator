@@ -47,7 +47,7 @@ export default class App extends React.Component {
                       <input
                         name="balance"
                         type="number"
-                        value={this.state.balance}
+                        defaultValue={this.state.balance}
                         onChange={this.handleChange}
                         id="balance"
                         placeholder="Loan Balance"
@@ -66,7 +66,7 @@ export default class App extends React.Component {
                         type="number"
                         name="rate"
                         step="0.01"
-                        value={this.state.rate}
+                        defaultValue={this.state.rate}
                         onChange={this.handleChange}
                         id="inputInterestRate"
                         placeholder="Interest Rate"
